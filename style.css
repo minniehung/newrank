@@ -1,0 +1,410 @@
+/* ==================== 1. 全域重設 ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: #fcfcfc;
+    color: #333;
+}
+
+/* ==================== 2. 導覽列與下拉選單 ==================== */
+.dropdown-content, .submenu-content {
+    list-style: none; /* 這一行就是把點點變不見的魔法 */
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* 讓 Logo 在最左，選單在最右 */
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
+.shop-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 選單清單 */
+.nav-menu > ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu > ul > li {
+    width: 90px; /* 給予固定的寬度，你可以依喜好微調數字 */
+    text-align: center; /* 讓文字在 110px 的框框內絕對置中 */
+}
+.nav-menu a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    color: #b8977e; /* 典雅的家具店大地色 */
+}
+
+.arrow {
+    font-size: 0.7rem;
+    margin-left: 4px;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+/* 下拉選單核心邏輯 */
+.dropdown {
+    position: relative; /* 讓子選單可以相對定位 */
+}
+
+.dropdown-content {
+    display: none; /* 預設隱藏 */
+    position: absolute;
+    top: 100%; /* 從按鈕下方掉出來 */
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 120px;
+}
+
+
+.dropdown-content li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+}
+
+.dropdown-content li a:hover {
+    background-color: #f5f5f5;
+}
+
+/* 當滑鼠移到商品系列上時：1. 顯示選單 2. 讓箭頭旋轉 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/* ==================== 第三層細項選單 (沙發分類) ==================== */
+
+/* 1. 讓帶有第三層選單的 <li> 可以相對定位 */
+.dropdown-submenu {
+    position: relative;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: auto; /* 💡 關鍵：從父元素的「最左側邊緣」開始展開 */
+    left: 100%;  /* 💡 取消原本向右的設定 */
+    background-color: #ffffff;
+    box-shadow: -4px 4px 12px rgba(0,0,0,0.1); /* 💡 陰影改向左下方，看起來更立體 */
+    border-radius: 4px;
+    min-width: 120px;
+}
+
+.submenu-content li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+}
+
+.submenu-content li a:hover {
+    background-color: #f5f5f5;
+}
+
+/* 🌟 修正 2：加入 > 符號，確保只有滑鼠碰到「所有沙發」時才展開，不會提早打開 */
+.dropdown-submenu:hover > .submenu-content {
+    display: block;
+}
+
+/* 讓向左的箭頭靠右對齊 */
+.left-arrow {
+    font-size: 0.6rem;
+    float: right;
+    margin-top: 4px;
+}
+
+/* ==================== 主視覺大圖區 ==================== */
+.hero-section {
+    height: 60vh; /* 佔據螢幕高度的 60% */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/1.jpg') no-repeat center center/cover;
+    /* 上面這行會自動幫照片蓋上一層半透明黑影，讓白字更明顯。請記得在 images 放一張 hero.jpg */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+/* ==================== 最新消息區塊 ==================== */
+.news-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* 在標題下方加一條好看的小裝飾線 */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #b8977e;
+    margin: 10px auto 0 auto;
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-left: 4px solid #b8977e; /* 消息左側的主題色線條 */
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.news-card h3 {
+    margin: 8px 0 12px 0;
+    color: #222;
+}
+
+.news-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ==================== 5. 歷史沿革頁面 (無中線交疊版) ==================== */
+
+.history-section {
+    padding: 80px 20px;
+    background-color: #f9f7f5; /* 溫暖的底色 */
+    overflow: hidden;
+}
+
+.history-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.history-title h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.history-title p {
+    color: #888;
+}
+
+/* 容器設定 */
+.timeline {
+    position: relative;
+    max-width: 900px; /* 控制整個區塊的最大寬度 */
+    margin: 0 auto;
+}
+
+/* 每個區塊的基礎設定 */
+.timeline-item {
+    width: 55%;
+    position: relative;
+    opacity: 0;
+
+    /* 統一動畫速度：1.2秒滑入 */
+    transition: opacity 2.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 左側區塊：預設往「左邊」躲起來 (-100px) */
+.left {
+    margin-right: auto;
+    margin-left: 0;
+    transform: translateX(-100px);
+}
+
+/* 右側區塊：預設往「右邊」躲起來 (100px) */
+.right {
+    margin-left: auto;
+    margin-right: 0;
+    transform: translateX(100px);
+}
+
+/* 當 JS 加上 appear 時，透明度變 1，且回到正中間 (0) 的位置 */
+.timeline-item.appear {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 🌟 關鍵 2：讓第二個以後的區塊往上提，產生「上下堆疊」的立體層次感 */
+.timeline-item + .timeline-item {
+    margin-top: 25px;
+}
+
+
+/* 為了讓交疊時有漂亮的前後順序，偶數層次高，奇數層次低 */
+.timeline-item:nth-child(odd) { z-index: 1; }
+.timeline-item:nth-child(even) { z-index: 2; }
+
+
+/* 內容卡片的設計 (移除原本的點點，改為乾淨的長方形) */
+.timeline-content {
+    padding: 20px 0; /* 拿掉原本的白底和陰影，把左右邊距歸零，讓文字自然對齊 */
+}
+
+.timeline-content h3 {
+    color: #b8977e; /* 年份維持品牌大地色 */
+    font-size: 2.2rem; /* 既然沒有框框了，可以把年份稍微放大一點，更有設計感 */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.timeline-content h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    color: #666;
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+/* ==================== 6. 客戶案例頁面 ==================== */
+
+.cases-section {
+    padding: 60px 0; /* 上下留白，左右不留白以便照片可以滑到螢幕邊緣 */
+    background-color: #ffffff;
+}
+
+.cases-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.cases-header h2 {
+    font-size: 2.1rem;
+    color: #333;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.cases-header p {
+    color: #888;
+}
+
+/* 每一組家配師的區塊 */
+.stylist-group {
+    max-width: 1200px; /* 🌟 新增：設定最大寬度，這就是你想要的「無形的框」 */
+    margin: 0 auto 60px auto;
+}
+
+/* 家配師的名字與風格標籤 */
+.stylist-info {
+    padding: 0 40px; /* 讓文字跟導覽列的左右邊界對齊 */
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline; /* 讓名字和風格的底部對齊 */
+    gap: 15px;
+}
+
+.stylist-name {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.stylist-style {
+    font-size: 0.95rem; /* 維持小字 */
+    color: #333; /* 改成深黑色（與一般內文相同） */
+
+}
+
+/* 核心：左右滑動照片牆 */
+.photo-slider {
+    display: flex;
+    overflow-x: auto; /* 啟動水平滾動 */
+    padding: 0 40px 20px 40px; /* 左右留白，下方留白給捲軸或陰影 */
+    gap: 20px; /* 照片之間的間距 */
+
+    scrollbar-width: none;
+}
+
+/* 隱藏預設的醜醜捲軸 (針對 Chrome, Safari) */
+.photo-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* 照片本體樣式 */
+.case-photo {
+    /* 🌟 強制固定大小：這裡你可以隨時修改想要的寬度和高度 */
+    width: 320px;
+    height: 240px;
+    flex: 0 0 320px; /* 確保 Flexbox 不會把照片擠扁 */
+
+    object-fit: cover; /* 確保照片裁切完美，比例不變形 */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    /* 🌟 原本的 scroll-snap-align 也要刪除 */
+    transition: transform 0.3s ease;
+}
+
+/* 滑鼠碰到照片時，照片會微微放大 */
+.case-photo:hover {
+    transform: scale(1.03);
+}
