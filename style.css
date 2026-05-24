@@ -408,3 +408,106 @@ body {
 .case-photo:hover {
     transform: scale(1.03);
 }
+
+/* ==================== 漢堡按鈕 (電腦版預設隱藏) ==================== */
+.menu-toggle {
+    display: none; /* 電腦版不顯示 */
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+/* ==================== RWD 手機版設定 (螢幕寬度小於 768px 時啟動) ==================== */
+@media (max-width: 768px) {
+    /* 1. 讓 header 可以作為定位的基準 */
+    .navbar {
+        position: relative;
+        padding: 15px 20px;
+    }
+
+    /* 2. 顯示漢堡按鈕 */
+    .menu-toggle {
+        display: block;
+        position: absolute; /* 🌟 絕對定位：讓它脫離原本的排版限制 */
+        right: 20px;        /* 🌟 距離螢幕右邊緣 20px */
+        top: 50%;           /* 🌟 往下推 50% */
+        transform: translateY(-50%); /* 🌟 完美垂直置中對齊 */
+    }
+
+    /* 3. 隱藏原本的橫向選單，並改成直向下拉式 */
+    .nav-menu > ul {
+        display: none; /* 預設先藏起來 */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* 從 header 正下方開始展開 */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    /* 🌟 這是 JS 會呼叫的魔法標籤：加上 .show 之後就會顯示出來 */
+    .nav-menu > ul.show {
+        display: flex;
+    }
+
+    /* 4. 選單項目在手機上要佔滿整行 */
+    .nav-menu > ul > li {
+        width: 100%;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0; /* 選單之間加一條淺淺的分隔線 */
+    }
+
+    /* 5. 手機版的下拉選單處理 (不懸浮，直接往下長) */
+    .dropdown-content, .submenu-content {
+        position: static; /* 取消浮動設定 */
+        box-shadow: none;
+        background-color: #fcf9f6; /* 給點淡淡的底色區分層次 */
+        width: 100%;
+        padding: 0;
+    }
+
+    /* ==================== 歷史沿革 (手機版單行直排) ==================== */
+
+    /* 1. 讓卡片寬度佔滿手機螢幕 */
+    .timeline-item {
+        width: 100%;
+    }
+
+    /* 2. 取消原本電腦版的「上下重疊 (margin-top 負數)」 */
+    .timeline-item + .timeline-item {
+        margin-top: 30px; /* 恢復成正常的上下間距 */
+    }
+
+    /* 3. 把動畫改成單純從「下方」浮現，避免從左右飛進來時把手機螢幕撐出橫向捲軸 */
+    .left, .right {
+        transform: translateY(40px);
+    }
+
+    /* 4. 動畫出現時回到原位 */
+    .timeline-item.appear {
+        transform: translateY(0);
+    }
+
+    /* ==================== 客戶案例 (手機版微調) ==================== */
+
+    /* 1. 讓家配師名字和風格在手機上變成「上下排列」 */
+    .stylist-info {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0 20px; /* 配合手機螢幕，縮小左右留白 */
+    }
+
+    /* 2. 縮小照片牆的左右留白 */
+    .photo-slider {
+        padding: 10px 20px 20px 20px;
+    }
+
+    /* 3. 稍微縮小照片尺寸，讓螢幕邊緣能「露出一點點」下一張，提示可以滑動 */
+    .case-photo {
+        width: 240px;
+        height: 180px;
+        flex: 0 0 240px;
+    }
+}

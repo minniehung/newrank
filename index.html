@@ -13,7 +13,7 @@
         <img src="images/logo.jpg" alt="家具店 Logo" class="logo">
         <span class="shop-name">新協興居家美學</span>
     </div>
-
+    <div class="menu-toggle">☰</div>
     <nav class="nav-menu">
         <ul>
             <li><a href="index.html" class="active">首頁</a></li>
@@ -73,6 +73,17 @@
         </div>
     </div>
 </section>
+<script>
+    // 抓取漢堡按鈕和選單的元素
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu > ul');
 
+    // 當點擊漢堡按鈕時，幫選單加上或移除 'show' 這個標籤
+    if(menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    }
+</script>
 </body>
 </html>

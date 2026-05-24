@@ -18,6 +18,8 @@
         <span class="shop-name">新協興居家美學</span>
     </div>
 
+    <div class="menu-toggle">☰</div>
+
     <nav class="nav-menu">
         <ul>
             <li><a href="index.html">首頁</a></li>
@@ -122,6 +124,17 @@
         slider.addEventListener('touchstart', () => isPaused = true);
         slider.addEventListener('touchend', () => isPaused = false);
     });
+
+    //手機版
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu > ul');
+
+    // 當點擊漢堡按鈕時，幫選單加上或移除 'show' 這個標籤
+    if(menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+    }
 </script>
 
 </body>
