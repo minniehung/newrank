@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-        <html lang="zh-TW">
-        <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>客戶案例 | 新協興居家美學</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客戶案例 | 新協興居家美學</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -88,26 +84,24 @@
         </div>
     </div>
 </section>
+
 <script>
     // 抓出畫面上所有的照片牆區塊
     const sliders = document.querySelectorAll('.photo-slider');
 
     sliders.forEach(slider => {
         // 🌟 無縫接軌的魔法：把裡面的照片複製一份貼在後面
-        // 讓原本的照片陣列變成兩倍長
         slider.innerHTML += slider.innerHTML;
 
         let isPaused = false;
         let scrollSpeed = 1;  // 每次移動的距離 (數字越大滑越快)
 
-        // 設定一個計時器，每 20 毫秒執行一次滑動
+        // 設定一個計時器，每 40 毫秒執行一次滑動 (速度比之前稍慢一點，更柔和)
         setInterval(() => {
             if (!isPaused) {
                 slider.scrollLeft += scrollSpeed;
 
-                // 🌟 關鍵邏輯：
-                // 當滑動的距離超過「總捲軸長度的一半」時，瞬間偷偷把位置減去一半。
-                // 因為此時畫面剛好對齊複製出來的照片，瞬間切換回去完全看不出破綻！
+                // 🌟 關鍵邏輯：超過總捲軸長度一半時，瞬間減去一半回到原點
                 if (slider.scrollLeft >= slider.scrollWidth / 2) {
                     slider.scrollLeft -= slider.scrollWidth / 2;
                 }
@@ -116,20 +110,15 @@
 
         // 當客人的滑鼠移到照片上時，暫停滑動
         slider.addEventListener('mouseenter', () => isPaused = true);
-
-        // 當滑鼠移開時，繼續滑動
         slider.addEventListener('mouseleave', () => isPaused = false);
-
-        // 照顧手機版客人：手指碰到時暫停，手指離開時繼續
         slider.addEventListener('touchstart', () => isPaused = true);
         slider.addEventListener('touchend', () => isPaused = false);
     });
 
-    //手機版
+    // 手機版漢堡選單開關
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu > ul');
 
-    // 當點擊漢堡按鈕時，幫選單加上或移除 'show' 這個標籤
     if(menuToggle) {
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('show');
